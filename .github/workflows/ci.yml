@@ -1,0 +1,26 @@
+name: Dart
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: dev
+      - name: Checkout Dart SDK
+        uses: actions/checkout@v2
+        with:
+          repository: dart-lang/sdk
+      - name: Checkout co19
+        uses: actions/checkout@v2
+        with:
+          path: tests/co19/src
+      - name: Parse tests
+        run: tools/test.py --list -n analyzer-asserts-strong-linux
