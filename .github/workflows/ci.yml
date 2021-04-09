@@ -24,5 +24,9 @@ jobs:
           path: tests/co19/src
       - name: Link Dart SDK
         run: ln -s "$(dirname `which dart`)/.." tools/sdks/dart-sdk
+      - name: Get dependencies
+        run: |
+          cd pkg/test_runner
+          dart pub get
       - name: Parse tests
         run: tools/test.py --list -n analyzer-asserts-strong-linux
